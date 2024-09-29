@@ -30,6 +30,9 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	if camera.has_node("revolver_model"):
+			camera.get_node("revolver_model").visible = hasGun
+
 	if hasGun:
 		# Check if user already has a crosshair node if not lets add it
 		# Otherwise we will continuisly add crosshair nodes and lag the game
@@ -83,6 +86,8 @@ func _unhandled_input(event: InputEvent) -> void:
                 # Apply an impulse in the forward direction
 				node.apply_impulse(forward_dir * 5)  # Adjust the mu
 		
+			if self.has_node("revolver_model"):
+				self.remove_child(self.get_node("revolver_model"))
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 

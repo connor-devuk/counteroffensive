@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxbdxa47fexim"]
+
+[ext_resource type="Texture2D" uid="uid://cp5sks4g5avi5" path="res://assets/revolver/Gun.png" id="1_kp07j"]
+[ext_resource type="ArrayMesh" uid="uid://bjjtaouy0ikga" path="res://assets/revolver/Gun.obj" id="2_tla5b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oju1r"]
+albedo_texture = ExtResource("1_kp07j")
+
+[node name="revolver_model" type="Node3D"]
+
+[node name="Gun" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_oju1r")
+mesh = ExtResource("2_tla5b")

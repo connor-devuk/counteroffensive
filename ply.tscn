@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbf5kyf8l80g3"]
+[gd_scene load_steps=5 format=3 uid="uid://dbf5kyf8l80g3"]
 
 [ext_resource type="Script" path="res://ply.gd" id="1_qh8dx"]
+[ext_resource type="PackedScene" uid="uid://dxbdxa47fexim" path="res://weapons/revolver_model.tscn" id="2_g8fk4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_00l4p"]
 
@@ -26,3 +27,7 @@ collide_with_areas = true
 
 [node name="Marker3D" type="Marker3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.723181)
+
+[node name="revolver_model" parent="Camera3D" instance=ExtResource("2_g8fk4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.55767, -0.157101, -0.541907)
+visible = false

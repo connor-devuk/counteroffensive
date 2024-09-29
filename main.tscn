@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp41l2lqbepds"]
+[gd_scene load_steps=10 format=3 uid="uid://bp41l2lqbepds"]
 
 [ext_resource type="PackedScene" uid="uid://dbf5kyf8l80g3" path="res://ply.tscn" id="1_5ebyr"]
 [ext_resource type="PackedScene" uid="uid://c8vv8bvprghrb" path="res://gun_object.tscn" id="2_a0ip7"]
+[ext_resource type="PackedScene" uid="uid://cnarpd65356su" path="res://m4a4_object.tscn" id="3_ppi24"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x6u87"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -75,3 +76,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0819168, 0, 0.136679)
 
 [node name="gun" parent="." instance=ExtResource("2_a0ip7")]
 transform = Transform3D(0.0540788, 0, 0.998537, 0, 1, 0, -0.998537, 0, 0.0540788, 2.93788, 0.257239, -7.62295)
+
+[node name="m4a4" parent="." instance=ExtResource("3_ppi24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40801, 1.35564, -3.87157)

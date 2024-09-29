@@ -31,7 +31,6 @@ shape = SubResource("ConvexPolygonShape3D_wiceq")
 
 [node name="gun" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0414938, 0, -0.103934)
-visible = false
 
 [node name="gun" type="CollisionShape3D" parent="gun"]
 physics_interpolation_mode = 1
