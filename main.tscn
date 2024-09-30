@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp41l2lqbepds"]
+[gd_scene load_steps=11 format=3 uid="uid://bp41l2lqbepds"]
 
 [ext_resource type="PackedScene" uid="uid://dbf5kyf8l80g3" path="res://ply.tscn" id="1_5ebyr"]
-[ext_resource type="PackedScene" uid="uid://c8vv8bvprghrb" path="res://gun_object.tscn" id="2_a0ip7"]
-[ext_resource type="PackedScene" uid="uid://cnarpd65356su" path="res://m4a4_object.tscn" id="3_ppi24"]
+[ext_resource type="PackedScene" uid="uid://c8vv8bvprghrb" path="res://entities/revolver_object.tscn" id="2_a0ip7"]
+[ext_resource type="PackedScene" uid="uid://cnarpd65356su" path="res://entities/m4a4_object.tscn" id="3_ppi24"]
+[ext_resource type="PackedScene" uid="uid://bi3x3t87y7bx6" path="res://weapons/bullet_model.tscn" id="4_q3dl5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x6u87"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -74,8 +75,11 @@ size = Vector3(9.93078, 0.147949, 4.32423)
 [node name="ply" parent="." instance=ExtResource("1_5ebyr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0819168, 0, 0.136679)
 
-[node name="gun" parent="." instance=ExtResource("2_a0ip7")]
+[node name="revolver" parent="." instance=ExtResource("2_a0ip7")]
 transform = Transform3D(0.0540788, 0, 0.998537, 0, 1, 0, -0.998537, 0, 0.0540788, 2.93788, 0.257239, -7.62295)
 
 [node name="m4a4" parent="." instance=ExtResource("3_ppi24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40801, 1.35564, -3.87157)
+transform = Transform3D(-4.2222e-08, -1.13133e-08, 1, -0.258819, 0.965926, 0, -0.965926, -0.258819, -4.37114e-08, -0.842933, 0.431011, -8.88931)
+
+[node name="bullet_model" parent="." instance=ExtResource("4_q3dl5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.626055, 1.21818, -4.68557)

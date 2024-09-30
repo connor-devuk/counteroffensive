@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://c8vv8bvprghrb"]
 
-[ext_resource type="Texture2D" uid="uid://cp5sks4g5avi5" path="res://assets/revolver/Gun.png" id="1_pkm1s"]
-[ext_resource type="ArrayMesh" uid="uid://bjjtaouy0ikga" path="res://assets/revolver/Gun.obj" id="2_e5iaj"]
-[ext_resource type="Script" path="res://gun.gd" id="3_uq5td"]
+[ext_resource type="Texture2D" uid="uid://cp5sks4g5avi5" path="res://assets/revolver/Gun.png" id="1_qsu4w"]
+[ext_resource type="ArrayMesh" uid="uid://bjjtaouy0ikga" path="res://assets/revolver/Gun.obj" id="2_7je0y"]
+[ext_resource type="Script" path="res://entities/gun.gd" id="3_o07ag"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3wfq1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asa1c"]
-albedo_texture = ExtResource("1_pkm1s")
+albedo_texture = ExtResource("1_qsu4w")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wiceq"]
 points = PackedVector3Array(-0.355752, 0.140147, 0.0110825, -0.357008, 0.140992, -0.00836995, 0.108186, 0.127633, 0.0120902, 0.000980355, 0.041838, -0.0629611, -0.127586, 0.0525623, 0.0657056, -0.417161, 0.074011, -0.0307819, 0.129546, -0.258361, 0.0335263, -0.417161, 0.0847353, 0.0335263, 0.258314, -0.172526, 0.0335263, 0.129546, -0.258361, -0.0307819, 0.236886, -0.086731, -0.0307819, 0.000980355, 0.0525623, 0.0657056, -0.00697399, 0.108877, -0.0465478, -0.417161, 0.138357, 0.0335263, 0.172536, 0.0525623, 0.0335263, -0.127586, 0.041838, -0.0629611, -0.417161, 0.138357, -0.0307819, 0.0437685, 0.138357, 0.0335263, 0.269061, -0.236912, -0.0307819, 0.108186, 0.127633, -0.00933321, 0.247566, -0.258361, 0.0335263, -0.417161, 0.074011, 0.0228083, 0.236886, -0.086731, 0.0335263, 0.0433787, 0.131804, -0.0181852, 0.247566, -0.258361, -0.0307819, 0.269061, -0.236912, 0.0335263, 0.168923, 0.0367532, -0.0188557, -0.121174, 0.0780882, -0.0552558, -0.00896087, 0.104193, 0.0478728, 0.247566, -0.118904, -0.0307819, 0.269061, -0.226147, -0.0307819, -0.12191, 0.108877, -0.0465478)
@@ -15,24 +15,24 @@ points = PackedVector3Array(-0.355752, 0.140147, 0.0110825, -0.357008, 0.140992,
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqi1i"]
 size = Vector3(0.741943, 0.383516, 0.25415)
 
-[node name="gun" type="RigidBody3D"]
+[node name="revolver" type="RigidBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_3wfq1")
 gravity_scale = 4.171
 
-[node name="Gun" type="MeshInstance3D" parent="."]
+[node name="Revolver" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0414938, 0, -0.103934)
 material_override = SubResource("StandardMaterial3D_asa1c")
-mesh = ExtResource("2_e5iaj")
-script = ExtResource("3_uq5td")
+mesh = ExtResource("2_7je0y")
+script = ExtResource("3_o07ag")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0414938, 0, -0.103934)
 shape = SubResource("ConvexPolygonShape3D_wiceq")
 
-[node name="gun" type="Area3D" parent="."]
+[node name="revolver" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0414938, 0, -0.103934)
 
-[node name="gun" type="CollisionShape3D" parent="gun"]
+[node name="revolver" type="CollisionShape3D" parent="revolver"]
 physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0813253, -0.0329425, -0.0115662)
 shape = SubResource("BoxShape3D_hqi1i")

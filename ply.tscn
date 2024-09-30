@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbf5kyf8l80g3"]
+[gd_scene load_steps=6 format=3 uid="uid://dbf5kyf8l80g3"]
 
 [ext_resource type="Script" path="res://ply.gd" id="1_qh8dx"]
 [ext_resource type="PackedScene" uid="uid://dxbdxa47fexim" path="res://weapons/revolver_model.tscn" id="2_g8fk4"]
+[ext_resource type="PackedScene" uid="uid://f718qn37xc6a" path="res://weapons/m4a4_model.tscn" id="3_1kisl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_00l4p"]
 
@@ -30,4 +31,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.723181)
 
 [node name="revolver_model" parent="Camera3D" instance=ExtResource("2_g8fk4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.55767, -0.157101, -0.541907)
+visible = false
+
+[node name="m4a4_model" parent="Camera3D" instance=ExtResource("3_1kisl")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.706167, -0.115861, -1.0542)
 visible = false

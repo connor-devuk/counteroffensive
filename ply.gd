@@ -5,6 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 8.0
 
 var hasGun : bool = false
+var selectedGun: String
 var revolver_script: Node = null
 var gun_model: Node3D = null
 
@@ -30,8 +31,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	if camera.has_node("revolver_model"):
-			camera.get_node("revolver_model").visible = hasGun
+	if camera.has_node(selectedGun+"_model"):
+			camera.get_node(selectedGun+"_model").visible = hasGun
 
 	if hasGun:
 		# Check if user already has a crosshair node if not lets add it
@@ -40,8 +41,9 @@ func _physics_process(delta: float) -> void:
 			self.add_child(ResourceLoader.load("res://addons/customizableCrosshair/crosshair/crosshair.tscn").instantiate())
 
 		if !revolver_script:
+			const PATH = "res://weapons/revolver.gd"
 
-			revolver_script = preload("res://weapons/revolver.gd").new()
+			revolver_script = preload(PATH).new()
 
 			add_child(revolver_script)
 
@@ -66,37 +68,81 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x - event.relative.y * MOUSE_SENSITIVITY, -1.5, 1.5)
 
-	if event.is_action("pickup"):
+	if event.is_action_released("pickup"):
 		pickupGun()
 
 	if event.is_action_pressed("dropItem"):
-		if hasGun:
-			hasGun = false
-			if !get_parent().has_node("gun"):
-				var node: RigidBody3D = preload("res://gun_object.tscn").instantiate()
-				get_parent().add_child(node)
-                
-                # Set the initial position of the gun to be slightly in front of the camera
-				var drop_pos = camera.global_transform.origin + (-camera.global_transform.basis.z * 1.5)
-				node.global_transform.origin = drop_pos
-                
-                # Calculate the forward direction based on the camera's orientation
-				var forward_dir = -camera.global_transform.basis.z
-                
-                # Apply an impulse in the forward direction
-				node.apply_impulse(forward_dir * 5)  # Adjust the mu
-		
-			if self.has_node("revolver_model"):
-				self.remove_child(self.get_node("revolver_model"))
+		dropGun()
+				
+	
+	if event.is_action_pressed("third_person"):
+		pass
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 @onready var raycast := $Camera3D/RayCast3D;
 
 func pickupGun() -> void:
-	print('is pickup signal', raycast.get_collider())
-	if raycast.is_colliding() and raycast.get_collider().name == "gun":
-		hasGun = true
-		# print('picked up gun', self.get_parent().get_children())
-		if self.get_parent().has_node("gun"):
-			self.get_parent().remove_child(self.get_parent().get_node("gun"))
+	if raycast.is_colliding():
+		var collider = raycast.get_collider()
+		var gun_scenes = list_files_in_directory("res://entities/")
+		
+		# Check if the collider is a gun
+		for scene in gun_scenes:
+			if scene.get_file().get_basename() == collider.name+'_object':
+				var node_path = NodePath(collider.name)
+				if self.get_parent().has_node(node_path):
+					if hasGun:
+						dropGun()
+					hasGun = true
+					selectedGun = node_path
+					self.get_parent().remove_child(self.get_parent().get_node(node_path))
+				print("Picked up gun: ", collider.name)
+				return
+		
+			print("Collided with non-gun object: ", collider.name)
+	else:
+			print("No collision detected")
+
+func dropGun() -> void:
+	if hasGun:
+		hasGun = false
+		var ENTITY_SCENE_PATH = "res://entities/" + selectedGun + "_object.tscn"
+		if !get_parent().has_node(selectedGun):
+			var scene = load(ENTITY_SCENE_PATH)
+			if scene is PackedScene:
+				if camera.has_node(selectedGun+"_model"):
+					camera.get_node(selectedGun+"_model").visible = false
+			
+				var node: RigidBody3D = scene.instantiate()
+				get_parent().add_child(node)
+					
+				# Set the initial position of the gun to be slightly in front of the camera
+				var drop_pos = camera.global_transform.origin + (-camera.global_transform.basis.z * 1.5)
+				node.global_transform.origin = drop_pos
+					
+				# Calculate the forward direction based on the camera's orientation
+				var forward_dir = -camera.global_transform.basis.z
+					
+				# Apply an impulse in the forward direction
+				node.apply_impulse(forward_dir * 5)  # Adjust the multiplier as needed
+			else:
+				print("Failed to load scene: ", ENTITY_SCENE_PATH)
+		else:
+			print("Gun node already exists")
+	else:
+		print("No gun to drop")
+# Simple function to get a list of guns available
+func list_files_in_directory(path: String) -> Array:
+	var files = []
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".tscn"):
+				files.append(file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	return files
