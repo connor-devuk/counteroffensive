@@ -14,7 +14,7 @@ func _process(_delta: float) -> void:
 
 func shoot() -> void:
 	var raycast = player.raycast
-	var space_state = get_world_3d().direct_space_state
+	var space_state = player.get_world_3d().direct_space_state
     
     # Get the global transform of the raycast
 	var ray_start = raycast.global_transform.origin
@@ -35,4 +35,4 @@ func shoot() -> void:
 	else:
 		print("Nothing in trajectory")
     
-	print("Bang!")
+	# print("Bang!")
