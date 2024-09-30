@@ -12,7 +12,7 @@ var gun_model: Node3D = null
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += Vector3(0, -24, 0) * delta
+		velocity += Vector3(0, -20, 0) * delta
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -73,14 +73,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("dropItem"):
 		dropGun()
-				
-	
-	if event.is_action_pressed("third_person"):
-		pass
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-@onready var raycast := $Camera3D/RayCast3D;
+@onready var raycast := $Camera3D/RayCast3D;	
 
 func pickupGun() -> void:
 	if raycast.is_colliding():
