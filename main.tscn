@@ -1,9 +1,53 @@
-[gd_scene load_steps=11 format=3 uid="uid://bp41l2lqbepds"]
+[gd_scene load_steps=29 format=3 uid="uid://bp41l2lqbepds"]
 
 [ext_resource type="PackedScene" uid="uid://dbf5kyf8l80g3" path="res://ply.tscn" id="1_5ebyr"]
 [ext_resource type="PackedScene" uid="uid://c8vv8bvprghrb" path="res://entities/revolver_object.tscn" id="2_a0ip7"]
+[ext_resource type="Texture2D" uid="uid://wnhhdj5gvv6b" path="res://assets/textures/Ground068_1K-JPG/Ground068_1K-JPG_Color.jpg" id="2_k6c7s"]
+[ext_resource type="Texture2D" uid="uid://bbummxxd3cbd1" path="res://assets/textures/Ground068_1K-JPG/Ground068_1K-JPG_NormalGL.jpg" id="3_dhhv6"]
+[ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="3_o5ggj"]
 [ext_resource type="PackedScene" uid="uid://cnarpd65356su" path="res://entities/m4a4_object.tscn" id="3_ppi24"]
-[ext_resource type="PackedScene" uid="uid://bi3x3t87y7bx6" path="res://weapons/bullet_model.tscn" id="4_q3dl5"]
+[ext_resource type="Texture2D" uid="uid://q8mng1pauxbq" path="res://World/Heightmap_0_0.res" id="4_i3fjp"]
+[ext_resource type="Texture2D" uid="uid://rv5rprsois78" path="res://assets/textures/Ground068_1K-JPG/Ground068_1K-JPG_Roughness.jpg" id="4_m6tir"]
+[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZoneResource.cs" id="5_2c2tg"]
+[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="5_sxpax"]
+[ext_resource type="Texture2D" uid="uid://cql1lwsi8n418" path="res://assets/textures/PavingStones142_1K-JPG/PavingStones142_1K-JPG_Color.jpg" id="6_qo1ll"]
+[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZonesResource.cs" id="6_y6p04"]
+[ext_resource type="Texture2D" uid="uid://b1k1w3lbews44" path="res://assets/textures/PavingStones142_1K-JPG/PavingStones142_1K-JPG_NormalGL.jpg" id="7_4yrc3"]
+[ext_resource type="Texture2D" uid="uid://cmdpd4oyp6dwf" path="res://assets/textures/PavingStones142_1K-JPG/PavingStones142_1K-JPG_Roughness.jpg" id="8_db5se"]
+[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetsResource.cs" id="9_vt4qw"]
+[ext_resource type="Texture2D" uid="uid://e6rgq4w14xvb" path="res://World/Splatmap_0_0_0.res" id="11_dcnnk"]
+
+[sub_resource type="Resource" id="Resource_c8wfh"]
+script = ExtResource("5_sxpax")
+Name = "Grass"
+AlbedoTexture = ExtResource("2_k6c7s")
+NormalTexture = ExtResource("3_dhhv6")
+RoughnessTexture = ExtResource("4_m6tir")
+TextureDetail = -1
+
+[sub_resource type="Resource" id="Resource_al86f"]
+script = ExtResource("5_sxpax")
+Name = "Brick"
+AlbedoTexture = ExtResource("6_qo1ll")
+NormalTexture = ExtResource("7_4yrc3")
+RoughnessTexture = ExtResource("8_db5se")
+TextureDetail = -1
+
+[sub_resource type="Resource" id="Resource_vca57"]
+script = ExtResource("9_vt4qw")
+TextureSets = [SubResource("Resource_c8wfh"), SubResource("Resource_al86f")]
+
+[sub_resource type="Resource" id="Resource_0wrw3"]
+script = ExtResource("5_2c2tg")
+ZonePosition = Vector2i(0, 0)
+HeightMapTexture = ExtResource("4_i3fjp")
+SplatmapsTexture = [ExtResource("11_dcnnk")]
+FoliagesTexture = []
+ObjectsTexture = []
+
+[sub_resource type="Resource" id="Resource_7pyec"]
+script = ExtResource("6_y6p04")
+Zones = [SubResource("Resource_0wrw3")]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x6u87"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,6 +62,9 @@ sky = SubResource("Sky_dxkpo")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b68p8"]
+albedo_texture = ExtResource("2_k6c7s")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vom3x"]
 albedo_color = Color(0.384314, 0.207843, 0.901961, 1)
 
@@ -27,47 +74,68 @@ albedo_color = Color(0, 0.701961, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymjf0"]
 albedo_color = Color(1, 0.194376, 0.144153, 1)
 
-[node name="Node3D" type="Node3D"]
+[node name="World" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="World Entities" type="Node3D" parent="."]
+
+[node name="TerraBrush" type="Node3D" parent="World Entities"]
+script = ExtResource("3_o5ggj")
+DataPath = "res://World"
+TextureSets = SubResource("Resource_vca57")
+TerrainZones = SubResource("Resource_7pyec")
+metadata/_edit_lock_ = true
+
+[node name="Enviroment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
 environment = SubResource("Environment_gpplk")
 
-[node name="wall1" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123167, 1.78534, 10.6219)
-material_override = SubResource("StandardMaterial3D_vom3x")
-use_collision = true
-size = Vector3(24.5323, 4.27498, 0.382614)
-
-[node name="wall2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123167, 1.78534, -10.3545)
-material_override = SubResource("StandardMaterial3D_vom3x")
-use_collision = true
-size = Vector3(24.5323, 4.27498, 0.382614)
-
-[node name="wall3" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.2051, 1.78534, 0.140493)
-material_override = SubResource("StandardMaterial3D_vom3x")
-use_collision = true
-size = Vector3(21.3811, 4.27498, 0.382614)
-
-[node name="wall4" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.9943, 1.78534, 0.140493)
-material_override = SubResource("StandardMaterial3D_vom3x")
-use_collision = true
-size = Vector3(21.3811, 4.27498, 0.382614)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="floor" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0819168, -0.426025, 0.136679)
+[node name="Playarea" type="Node3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+
+[node name="wall1" type="CSGBox3D" parent="Playarea"]
+transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, -5.41762, 8.80576, -3.02247)
+material_override = SubResource("StandardMaterial3D_b68p8")
+use_collision = true
+flip_faces = true
+size = Vector3(24.5323, 4.27498, 0.382614)
+
+[node name="wall2" type="CSGBox3D" parent="Playarea"]
+transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, 5.07059, -6.92654, 6.06057)
+material_override = SubResource("StandardMaterial3D_vom3x")
+use_collision = true
+size = Vector3(24.5323, 4.27498, 0.382614)
+
+[node name="wall3" type="CSGBox3D" parent="Playarea"]
+transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, -10.6402, -4.28693, 4.53659)
+material_override = SubResource("StandardMaterial3D_vom3x")
+use_collision = true
+size = Vector3(21.3811, 4.27498, 0.382614)
+
+[node name="wall4" type="CSGBox3D" parent="Playarea"]
+transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, 13.623, 1.23285, 1.34975)
+material_override = SubResource("StandardMaterial3D_vom3x")
+use_collision = true
+size = Vector3(8.15741, 4.27498, 0.382614)
+
+[node name="wall5" type="CSGBox3D" parent="Playarea"]
+transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, 7.03557, 11.114, -4.35515)
+material_override = SubResource("StandardMaterial3D_vom3x")
+use_collision = true
+size = Vector3(8.15741, 4.27498, 0.382614)
+
+[node name="floor" type="CSGBox3D" parent="Playarea"]
+transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, -0.139282, -0.145974, -0.407653)
 material_override = SubResource("StandardMaterial3D_alby5")
 use_collision = true
 size = Vector3(24.624, 0.147949, 21.3936)
 
-[node name="ramp" type="CSGBox3D" parent="."]
-transform = Transform3D(0.902352, -0.430999, 0, 0.430999, 0.902352, 0, 0, 0, 1, 7.56883, 1.72896, -8.00725)
+[node name="ramp" type="CSGBox3D" parent="Playarea"]
+transform = Transform3D(-0.78146, 0.373256, -0.5, -0.175231, 0.637804, 0.75, 0.598844, 0.67371, -0.433013, -2.55117, -8.41836, 6.85677)
 material_override = SubResource("StandardMaterial3D_ymjf0")
 use_collision = true
 size = Vector3(9.93078, 0.147949, 4.32423)
@@ -76,10 +144,7 @@ size = Vector3(9.93078, 0.147949, 4.32423)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0819168, 0, 0.136679)
 
 [node name="revolver" parent="." instance=ExtResource("2_a0ip7")]
-transform = Transform3D(0.0540788, 0, 0.998537, 0, 1, 0, -0.998537, 0, 0.0540788, 2.93788, 0.257239, -7.62295)
+transform = Transform3D(-0.021082, 0, -0.999778, 0, 1, 0, 0.999778, 0, -0.021082, -11.7624, 1.8558, -4.59585)
 
 [node name="m4a4" parent="." instance=ExtResource("3_ppi24")]
-transform = Transform3D(-4.2222e-08, -1.13133e-08, 1, -0.258819, 0.965926, 0, -0.965926, -0.258819, -4.37114e-08, -0.842933, 0.431011, -8.88931)
-
-[node name="bullet_model" parent="." instance=ExtResource("4_q3dl5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.626055, 1.21818, -4.68557)
+transform = Transform3D(-4.2222e-08, -1.13133e-08, 1, 0.0249382, 0.999689, 1.23628e-08, -0.999689, 0.0249382, -4.19267e-08, -0.842933, 1.74002, -10.1874)
