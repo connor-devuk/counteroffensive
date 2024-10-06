@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 
 		# Let's add the gun to the user's hand
 
-		# DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 const MOUSE_SENSITIVITY = 0.0008;
 @onready var camera := $Camera3D;

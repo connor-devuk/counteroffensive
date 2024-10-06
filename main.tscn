@@ -82,6 +82,8 @@ albedo_color = Color(1, 0.194376, 0.144153, 1)
 script = ExtResource("3_o5ggj")
 DataPath = "res://World"
 TextureSets = SubResource("Resource_vca57")
+Foliages = []
+Objects = []
 TerrainZones = SubResource("Resource_7pyec")
 metadata/_edit_lock_ = true
 
