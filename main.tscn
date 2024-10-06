@@ -63,8 +63,9 @@ sky = SubResource("Sky_dxkpo")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_alby5"]
-albedo_color = Color(0, 0.701961, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqugi"]
+albedo_texture = ExtResource("6_qo1ll")
+uv1_scale = Vector3(3, 3, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogv6j"]
 albedo_texture = ExtResource("6_qo1ll")
@@ -107,29 +108,46 @@ use_collision = true
 size = Vector3(24.5323, 4.27498, 0.382614)
 
 [node name="wall3" type="CSGBox3D" parent="Playarea"]
-transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, -10.6402, -4.28693, 4.53659)
+transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, -10.6251, -4.29828, 4.54314)
 material_override = ExtResource("14_n1unv")
 use_collision = true
-size = Vector3(21.3811, 4.27498, 0.382614)
+size = Vector3(21.311, 4.27498, 0.382614)
 
-[node name="wall4" type="CSGBox3D" parent="Playarea"]
-transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, 13.623, 1.23285, 1.34975)
+[node name="wall5" type="CSGCombiner3D" parent="Playarea"]
+transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, 10.29, 6.17032, -1.50091)
 material_override = ExtResource("14_n1unv")
 use_collision = true
-size = Vector3(8.15741, 4.27498, 0.382614)
 
-[node name="wall5" type="CSGBox3D" parent="Playarea"]
-transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, 7.03557, 11.114, -4.35515)
+[node name="wall4" type="CSGBox3D" parent="Playarea/wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.77641e-15, 0, 0, 1, 0, 0, 0)
 material_override = ExtResource("14_n1unv")
 use_collision = true
-size = Vector3(8.15741, 4.27498, 0.382614)
-material = ExtResource("14_n1unv")
+size = Vector3(21.295, 4.27498, 0.382614)
 
-[node name="floor" type="CSGBox3D" parent="Playarea"]
-transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, -0.139282, -0.145974, -0.407653)
-material_override = SubResource("StandardMaterial3D_alby5")
+[node name="wall5" type="CSGBox3D" parent="Playarea/wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.77641e-15, 0, 0, 1, 0, -0.296345, 0)
+material_override = ExtResource("14_n1unv")
+operation = 2
 use_collision = true
-size = Vector3(24.624, 0.147949, 21.3936)
+size = Vector3(5.26587, 3.68229, 0.382614)
+
+[node name="roof2" type="CSGCombiner3D" parent="Playarea"]
+transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, -0.198, 2.05, 3.26)
+material_override = SubResource("StandardMaterial3D_vqugi")
+use_collision = true
+
+[node name="roof" type="CSGBox3D" parent="Playarea/roof2"]
+transform = Transform3D(1, 0, 0, -1.77641e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_vqugi")
+use_collision = true
+size = Vector3(24.3618, 0.147949, 21.1805)
+
+[node name="roof2" type="CSGBox3D" parent="Playarea/roof2"]
+transform = Transform3D(1, 0, 0, -1.77641e-15, 1, 0, 0, 0, 1, 7.25275, 0, -8.30652)
+material_override = SubResource("StandardMaterial3D_vqugi")
+operation = 2
+use_collision = true
+size = Vector3(9.85632, 0.147949, 4.56746)
 
 [node name="ramp" type="CSGBox3D" parent="Playarea"]
 transform = Transform3D(-0.78146, 0.373256, -0.5, -0.175231, 0.637804, 0.75, 0.598844, 0.67371, -0.433013, -2.55117, -8.41836, 6.85677)
