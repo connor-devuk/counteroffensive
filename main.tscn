@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bp41l2lqbepds"]
+[gd_scene load_steps=28 format=3 uid="uid://bp41l2lqbepds"]
 
 [ext_resource type="PackedScene" uid="uid://dbf5kyf8l80g3" path="res://ply.tscn" id="1_5ebyr"]
 [ext_resource type="PackedScene" uid="uid://c8vv8bvprghrb" path="res://entities/revolver_object.tscn" id="2_a0ip7"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cmdpd4oyp6dwf" path="res://assets/textures/PavingStones142_1K-JPG/PavingStones142_1K-JPG_Roughness.jpg" id="8_db5se"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetsResource.cs" id="9_vt4qw"]
 [ext_resource type="Texture2D" uid="uid://e6rgq4w14xvb" path="res://World/Splatmap_0_0_0.res" id="11_dcnnk"]
+[ext_resource type="Material" uid="uid://dguwxtimqa2mw" path="res://resources/textures/brick.tres" id="14_n1unv"]
 
 [sub_resource type="Resource" id="Resource_c8wfh"]
 script = ExtResource("5_sxpax")
@@ -62,17 +63,11 @@ sky = SubResource("Sky_dxkpo")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b68p8"]
-albedo_texture = ExtResource("2_k6c7s")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vom3x"]
-albedo_color = Color(0.384314, 0.207843, 0.901961, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_alby5"]
 albedo_color = Color(0, 0.701961, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymjf0"]
-albedo_color = Color(1, 0.194376, 0.144153, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogv6j"]
+albedo_texture = ExtResource("6_qo1ll")
 
 [node name="World" type="Node3D"]
 
@@ -85,7 +80,7 @@ TextureSets = SubResource("Resource_vca57")
 Foliages = []
 Objects = []
 TerrainZones = SubResource("Resource_7pyec")
-metadata/_edit_lock_ = true
+metadata/_edit_lock_ = false
 
 [node name="Enviroment" type="Node3D" parent="."]
 
@@ -101,34 +96,35 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 
 [node name="wall1" type="CSGBox3D" parent="Playarea"]
 transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, -5.41762, 8.80576, -3.02247)
-material_override = SubResource("StandardMaterial3D_b68p8")
+material_override = ExtResource("14_n1unv")
 use_collision = true
 flip_faces = true
 size = Vector3(24.5323, 4.27498, 0.382614)
 
 [node name="wall2" type="CSGBox3D" parent="Playarea"]
 transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, 5.07059, -6.92654, 6.06057)
-material_override = SubResource("StandardMaterial3D_vom3x")
+material_override = ExtResource("14_n1unv")
 use_collision = true
 size = Vector3(24.5323, 4.27498, 0.382614)
 
 [node name="wall3" type="CSGBox3D" parent="Playarea"]
 transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, -10.6402, -4.28693, 4.53659)
-material_override = SubResource("StandardMaterial3D_vom3x")
+material_override = ExtResource("14_n1unv")
 use_collision = true
 size = Vector3(21.3811, 4.27498, 0.382614)
 
 [node name="wall4" type="CSGBox3D" parent="Playarea"]
 transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, 13.623, 1.23285, 1.34975)
-material_override = SubResource("StandardMaterial3D_vom3x")
+material_override = ExtResource("14_n1unv")
 use_collision = true
 size = Vector3(8.15741, 4.27498, 0.382614)
 
 [node name="wall5" type="CSGBox3D" parent="Playarea"]
 transform = Transform3D(-0.5, 1.49012e-08, 0.866025, 0.75, 0.5, 0.433013, -0.433013, 0.866026, -0.25, 7.03557, 11.114, -4.35515)
-material_override = SubResource("StandardMaterial3D_vom3x")
+material_override = ExtResource("14_n1unv")
 use_collision = true
 size = Vector3(8.15741, 4.27498, 0.382614)
+material = ExtResource("14_n1unv")
 
 [node name="floor" type="CSGBox3D" parent="Playarea"]
 transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, -0.139282, -0.145974, -0.407653)
@@ -138,12 +134,12 @@ size = Vector3(24.624, 0.147949, 21.3936)
 
 [node name="ramp" type="CSGBox3D" parent="Playarea"]
 transform = Transform3D(-0.78146, 0.373256, -0.5, -0.175231, 0.637804, 0.75, 0.598844, 0.67371, -0.433013, -2.55117, -8.41836, 6.85677)
-material_override = SubResource("StandardMaterial3D_ymjf0")
+material_override = SubResource("StandardMaterial3D_ogv6j")
 use_collision = true
 size = Vector3(9.93078, 0.147949, 4.32423)
 
 [node name="ply" parent="." instance=ExtResource("1_5ebyr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0819168, 0, 0.136679)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.511436, 0.17798, -0.209152)
 
 [node name="revolver" parent="." instance=ExtResource("2_a0ip7")]
 transform = Transform3D(-0.021082, 0, -0.999778, 0, 1, 0, 0.999778, 0, -0.021082, -11.7624, 1.8558, -4.59585)

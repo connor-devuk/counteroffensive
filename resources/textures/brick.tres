@@ -1,0 +1,28 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://dguwxtimqa2mw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s50qj"]
+load_path = "res://.godot/imported/rough_block_wall_diff_2k.png-5942d14fb0d6af5abf48fb577c52e746.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kjflg"]
+load_path = "res://.godot/imported/rough_block_wall_arm_2k.png-f95dcf2179cb4f0536ad4bbc9c3f7a31.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v1kjv"]
+load_path = "res://.godot/imported/rough_block_wall_disp_2k.png-c872d0961ef6f2b412e926a961da6abf.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5viq4"]
+load_path = "res://.godot/imported/rough_block_wall_nor_gl_2k.png-722549be2cba0c0698d38a6e1829c339.s3tc.ctex"
+
+[resource]
+albedo_texture = SubResource("CompressedTexture2D_s50qj")
+metallic = 1.0
+metallic_texture = SubResource("CompressedTexture2D_kjflg")
+metallic_texture_channel = 2
+roughness_texture = SubResource("CompressedTexture2D_kjflg")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_5viq4")
+ao_enabled = true
+ao_texture = SubResource("CompressedTexture2D_kjflg")
+heightmap_enabled = true
+heightmap_texture = SubResource("CompressedTexture2D_v1kjv")
+uv1_scale = Vector3(4, 1, 1)
