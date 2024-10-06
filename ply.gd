@@ -36,7 +36,6 @@ func _physics_process(delta: float) -> void:
 
 	if hasGun:
 		# Check if user already has a crosshair node if not lets add it
-		# Otherwise we will continuisly add crosshair nodes and lag the game
 		if !self.has_node("Crosshair"):
 			self.add_child(ResourceLoader.load("res://addons/customizableCrosshair/crosshair/crosshair.tscn").instantiate())
 
@@ -58,7 +57,7 @@ func _physics_process(delta: float) -> void:
 
 		# Let's add the gun to the user's hand
 
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 const MOUSE_SENSITIVITY = 0.0008;
 @onready var camera := $Camera3D;
