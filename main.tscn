@@ -95,10 +95,9 @@ shadow_enabled = true
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 
 [node name="wall1" type="CSGBox3D" parent="Playarea"]
-transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, -5.41762, 8.80576, -3.02247)
+transform = Transform3D(-0.866025, 1.49012e-08, -0.5, -0.433013, 0.5, 0.75, 0.25, 0.866026, -0.433013, -5.43, 8.767, -3)
 material_override = ExtResource("14_n1unv")
 use_collision = true
-flip_faces = true
 size = Vector3(24.5323, 4.27498, 0.382614)
 
 [node name="wall2" type="CSGBox3D" parent="Playarea"]
